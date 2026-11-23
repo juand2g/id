@@ -1,0 +1,18 @@
+services:
+  mongo:
+    image: mongo:6.0
+    container_name: id_mongo_core
+    restart: always
+    ports:
+      # Puerto externo 27018 -> interno 27017
+      - "27018:27017"
+    volumes:
+      # CAMBIO CLAVE: Usamos un volumen nominal en lugar de una ruta ./
+      - mongo_storage:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+
+volumes:
+  # Definimos el volumen aquí
+  mongo_storage:
